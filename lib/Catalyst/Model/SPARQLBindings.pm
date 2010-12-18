@@ -2,11 +2,10 @@ package Catalyst::Model::SPARQLBindings;
 use Moose;
 use namespace::autoclean;
 
-1;
 
 =head1 NAME
 
-Catalyst::Model::SPARQLBindings - 
+Catalyst::Model::SPARQLBindings - A Catalyst Model to use SPARQL queries
 
 =head1 DESCRIPTION
 
@@ -16,11 +15,14 @@ Catalyst::Model::SPARQLBindings -
 
 =head1 AUTHOR
 
+Kjetil Kjernsmo
+
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2009 the above author(s).
+Copyright 2010 Kjetil Kjernsmo C<<kjetilk@cpan.org>>
 
-This sofware is free software, and is licensed under the same terms as perl itself.
+This software is free software, and is licensed under the same terms as perl itself.
 
 =cut
 
+1;
