@@ -6,6 +6,9 @@ use Module::Install::AuthorTests;
 
 name 'Catalyst-Model-SPARQLBindings';
 all_from 'lib/Catalyst/Model/SPARQLBindings.pm';
+readme_from 'lib/Test/RDF.pm';
+author   q{Kjetil Kjernsmo <kjetilk@cpan.org>};
+license  'perl';
 
 requires 'Moose';
 requires 'RDF::Trine';
@@ -23,7 +26,11 @@ author_requires 'Test::Pod' => '1.14';
 
 author_tests 'xt/';
 
-resources repository => 'git://somewhere.com/myproject.git';
+auto_set_repository;
+auto_set_bugtracker;
 
+write_doap_changes;
+
+sign;
 
 WriteAll();
