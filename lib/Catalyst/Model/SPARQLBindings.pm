@@ -1,7 +1,10 @@
 package Catalyst::Model::SPARQLBindings;
 use Moose;
+extends 'Catalyst::Model';
 use namespace::autoclean;
 use Carp qw(croak);
+
+our $VERSION = '0.01';
 
 
 =head1 NAME
@@ -20,7 +23,7 @@ Instantiate a new model object.
 
 =head2 query($query)
 
-Pass a L<RDF::Query> object with a SPARQL SELECT query.
+Pass a L<RDF::Query> or subclass thereof object with a SPARQL SELECT query.
 
 =cut
 
@@ -34,14 +37,17 @@ The endpoint to be used for a L<RDF::Query::Client>.
 
 has 'endpoint' => (is => 'rw', isa => 'Str');
 
-=head2 model($uri)
+=head2 rdf_model($rdf_model)
 
-The model to be used for a L<RDF::Query>.
+The L<RDF::Trine::Model> to be used for a L<RDF::Query>.
 
 =cut
 
-has 'model' => (is => 'rw', isa => 'RDF::Trine::Model');
+has 'rdf_model' => (is => 'rw', isa => 'RDF::Trine::Model', builder => '_build_model', lazy => 1 );
 
+sub _build_model {
+  use Data::Dumper; warn Dumper(@_);
+}
 
 =head2 iterator
 
@@ -58,8 +64,8 @@ sub iterator {
     return $query->execute($self->endpoint);
   }
   if ($query->isa('RDF::Query')) {
-    croak "No model given for RDF::Query::Client" unless $self->model;
-    return $query->execute($self->model);
+    croak "No rdf_model given for RDF::Query" unless $self->rdf_model;
+    return $query->execute($self->rdf_model);
   }
 
   croak "No query given";
